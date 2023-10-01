@@ -1,7 +1,12 @@
 import { Component } from './Abstact/Component';
 import { Footer } from './Common/Footer';
+import { Router } from './Common/Router';
 import { Header } from './Common/Header';
 import { MainPage } from './Pages/MainPage';
+import { Account } from './Pages/Account';
+import { Reviews } from './Pages/Reviews';
+import { Catalog } from './Pages/Catalog';
+import { Basket } from './Pages/Basket';
 import './style.scss';
 
 const body = document.body;
@@ -19,7 +24,17 @@ class App {
   constructor(parrent: HTMLElement) {
     const wrap = new Component(body, 'div', ["wrapper"]);
     new Header(wrap.root);
-    new MainPage(wrap.root);
+    const main = new Component(wrap.root, "main");
+
+    const links = {
+      "#": new MainPage(main.root),
+      "#catalog": new Catalog(main.root),
+      "#basket": new Basket(main.root),
+      "#account": new Account(main.root),
+      "#reviews": new Reviews(main.root)
+    };
+
+    new Router(links);
     new Footer(wrap.root);
   }
 }
