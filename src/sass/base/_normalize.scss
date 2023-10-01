@@ -3,3 +3,65 @@
   padding: 0px;
   box-sizing: border-box;
 }
+
+body {
+  margin: 0;
+  color: #FFF;
+  font-family: Goudy Bookletter 1911;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 50;
+  line-height: normal;
+}
+
+.h1 {
+  color: #000;
+  font-family: Goudy Bookletter 1911;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+h3 {
+  color: #000;
+  font-family: Goudy Bookletter 1911;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+h4 {
+  font-family: Goudy Bookletter 1911;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.wrapper {
+  background-color: rgba(34, 66, 53, 1);
+}
+
+.container {
+  width: 1040px;
+  margin: auto;
+}
+
+input,
+button {
+  border: none;
+  font-family: inherit;
+}
+
+button,
+input[type="submit"] {
+  cursor: pointer;
+  background: none;
+}
+
+input:focus,
+button:focus {
+  outline: none;
+}

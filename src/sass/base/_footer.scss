@@ -1,0 +1,46 @@
+.footer {
+  background-color: rgba(241, 241, 213, 1);
+  color: black;
+  padding-top: 20px;
+}
+
+.icons__footer {
+  margin-right: 10px;
+}
+
+.footer__li {
+  margin-top: 10px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+
+  a {
+    text-decoration: none;
+    color: black;
+    padding-bottom: 10px;
+  }
+}
+
+.contacts__inner {
+  margin-bottom: 10px;
+}
+
+.footer__inner {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ssik__inner {
+  margin-top: 64px;
+  padding-bottom: 10px;
+}
+
+.ssik__li {
+  display: flex;
+  justify-content: space-between;
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+}

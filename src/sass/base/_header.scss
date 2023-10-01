@@ -1,0 +1,26 @@
+.header {
+  background-color: rgba(241, 241, 213, 1);
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 0 13px 0;
+
+}
+
+.header__nav {
+  display: flex;
+
+  a {
+    text-decoration: none;
+    color: black;
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+}
+
+.icons {
+  padding-left: 20px;
+}

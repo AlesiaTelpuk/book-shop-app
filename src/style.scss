@@ -1,10 +1,4 @@
 @import './sass/base/normalize';
-
-body {
-  color: aquamarine;
-  margin: 0;
-}
-
-.btnspace {
-  margin: 10px;
-}
+@import './sass/base/header';
+@import './sass/base/footer';
+@import './sass/base/main__page';
