@@ -3,7 +3,7 @@ import { Component } from "../Abstact/Component";
 export class Footer extends Component {
   constructor(parrent: HTMLElement) {
     super(parrent, "div", ["footer"]);
-    const footer = new Component(this.root, 'footer', ["footer"]);
+    const footer = new Component(this.root, 'footer');
     const container = new Component(footer.root, 'div', ["container"]);
     const footer__inner = new Component(container.root, 'div', ["footer__inner"]);
 

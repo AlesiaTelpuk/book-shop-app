@@ -1,0 +1,39 @@
+.title {
+  color: #FFF;
+  font-family: Goudy Bookletter 1911;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.auth__row {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 110px;
+  padding-right: 110px;
+}
+
+.auth__row-p {
+  width: 480px;
+  font-family: Goudy Bookletter 1911;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.auth__btn {
+  border-radius: 20px;
+  background: #F1F1D5;
+  width: 240px;
+  height: 50px;
+  color: #000;
+  font-family: Goudy Bookletter 1911;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}

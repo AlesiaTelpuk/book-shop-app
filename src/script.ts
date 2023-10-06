@@ -4,10 +4,15 @@ import { Router } from './Common/Router';
 import { Header } from './Common/Header';
 import { MainPage } from './Pages/MainPage';
 import { Account } from './Pages/Account';
+import { Authorization } from './Pages/Authorization';
 import { Reviews } from './Pages/Reviews';
 import { Catalog } from './Pages/Catalog';
 import { Basket } from './Pages/Basket';
 import './style.scss';
+import { initializeApp } from "firebase/app";
+import { firebaseConfig } from "./configFB";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
 
 const body = document.body;
 /*const btn1 = new Component(body, 'input', ["btnspace"], null, ["type", "value"], ["button", "Отобразить"]);
@@ -19,6 +24,7 @@ btn2.root.onclick = () => {
 btn1.root.onclick = () => {
   prg.render();
 }*/
+initializeApp(firebaseConfig);
 
 class App {
   constructor(parrent: HTMLElement) {
@@ -30,7 +36,7 @@ class App {
       "#": new MainPage(main.root),
       "#catalog": new Catalog(main.root),
       "#basket": new Basket(main.root),
-      "#account": new Account(main.root),
+      "#authorization": new Authorization(main.root),
       "#reviews": new Reviews(main.root)
     };
 
@@ -44,4 +50,9 @@ declare global {
     app: App;
   }
 }
-window.app = new App(document.body);
+
+
+const auth = getAuth();
+onAuthStateChanged(auth, (user) => {
+  if (!window.app) window.app = new App(document.body);
+})

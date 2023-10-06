@@ -1,3 +1,4 @@
+import { getAuth } from "firebase/auth";
 import { Component } from "../Abstact/Component";
 
 export class Router {
@@ -14,6 +15,13 @@ export class Router {
 
     const url = window.location.hash.slice(1);
 
-    this.links['#' + url].render();
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    if (url === 'reviews' && !user) {
+      this.links['#authorization'].render();
+    } else {
+      this.links['#' + url].render();
+    }
   }
 }
