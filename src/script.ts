@@ -12,6 +12,8 @@ import './style.scss';
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "./configFB";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { TServices } from './Abstact/Type';
+import { AuthService } from './Services/AuthService';
 
 
 const body = document.body;
@@ -26,21 +28,25 @@ btn1.root.onclick = () => {
 }*/
 initializeApp(firebaseConfig);
 
+const services = {
+  authService: new AuthService()
+};
+
 class App {
   constructor(parrent: HTMLElement) {
     const wrap = new Component(body, 'div', ["wrapper"]);
-    new Header(wrap.root);
+    new Header(wrap.root, services);
     const main = new Component(wrap.root, "main");
 
     const links = {
-      "#": new MainPage(main.root),
-      "#catalog": new Catalog(main.root),
-      "#basket": new Basket(main.root),
-      "#authorization": new Authorization(main.root),
-      "#reviews": new Reviews(main.root)
+      "#": new MainPage(main.root, services),
+      "#catalog": new Catalog(main.root, services),
+      "#basket": new Basket(main.root, services),
+      "#authorization": new Authorization(main.root, services),
+      "#reviews": new Reviews(main.root, services)
     };
 
-    new Router(links);
+    new Router(links, services);
     new Footer(wrap.root);
   }
 }
@@ -54,5 +60,7 @@ declare global {
 
 const auth = getAuth();
 onAuthStateChanged(auth, (user) => {
+  services.authService.user = user;
   if (!window.app) window.app = new App(document.body);
 })
+

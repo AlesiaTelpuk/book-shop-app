@@ -1,5 +1,6 @@
 .main__page {
   align-items: center;
+  margin-bottom: 110px;
 }
 
 .main__page-inner {
@@ -33,5 +34,7 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  margin: 10px 430px 110px;
+  display: block;
+  margin: auto;
+  margin-top: 30px;
 }
