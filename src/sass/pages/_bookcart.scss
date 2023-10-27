@@ -1,0 +1,51 @@
+.cartbooks__inner {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 150px;
+  row-gap: 50px;
+  // justify-content: space-between;
+}
+
+.cart {
+  display: flex;
+
+}
+
+.cart__buttons {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+
+.cartbook-btn {
+  margin-bottom: 20px;
+}
+
+.book-img {
+  width: 210px;
+  height: 300px;
+}
+
+.book__name,
+.book__author,
+.book__price {
+  width: 210px;
+  // font-family: Garamond;
+}
+
+.book__name {
+  font-size: 25px;
+  font-weight: 50;
+}
+
+.book__author {
+  opacity: 50%;
+  font-size: 15px;
+}
+
+.book__price {
+  font-size: 20px;
+  margin: 5px 0;
+  color: black;
+  font-weight: bold;
+}

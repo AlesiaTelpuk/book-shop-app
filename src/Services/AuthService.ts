@@ -23,6 +23,7 @@ export class AuthService extends Observer {
     signOut(auth)
       .then(() => {
         this.dispatch('userAuth', false);
+        window.location.reload();
       })
       .catch(() => {
         console.log('bad');

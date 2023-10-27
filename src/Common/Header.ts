@@ -12,9 +12,13 @@ export class Header extends Component {
     new Component(header__nav.root, "a", null, "Contact us", ["href"], ["#"]);
     new Component(header__nav.root, "a", null, "Reviews", ["href"], ["#reviews"]);
     const icons = new Component(header__inner.root, 'div', ["header__icons"]);
-    const icon1 = new Component(icons.root, 'a', ["icon1__a"], null, ["href"], ["#authorization"]);
+    const icon1 = new Component(icons.root, 'a', ["icon1__a"], null, ["href"], ["#account"]);
     const person = new Component(icon1.root, 'img', ["icons"], null, ["src", "alt"], ["./assets/Icons/Person.svg", "person"]);
     const personAuth = new Component(icon1.root, 'img', ["icons"], null, ["src", "alt"], ["./assets/Icons/PersonAuth.svg", "person"]);
+
+    const icon2 = new Component(icons.root, 'a', ["icon2__a"], null, ["href"], ["#basket"]);
+    new Component(icon2.root, 'img', ["icons"], null, ["src", "alt"], ["./assets/Icons/Basket.svg", "basket"]);
+
     const user = this.services.authService.user;
     if (user) {
       person.remove(); personAuth.render();
@@ -22,7 +26,5 @@ export class Header extends Component {
       personAuth.remove();
       person.render();
     }
-    const icon2 = new Component(icons.root, 'a', ["icon2__a"], null, ["href"], ["#basket"]);
-    new Component(icon2.root, 'img', ["icons"], null, ["src", "alt"], ["./assets/Icons/Basket.svg", "basket"]);
   }
 }

@@ -10,10 +10,13 @@ import { Catalog } from './Pages/Catalog';
 import { Basket } from './Pages/Basket';
 import './style.scss';
 import { initializeApp } from "firebase/app";
-import { firebaseConfig } from "./configFB";
+import { firebaseConfig } from "../configFB";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { TServices } from './Abstact/Type';
 import { AuthService } from './Services/AuthService';
+import { LogicService } from './Services/LogicService';
+import { getFirestore } from 'firebase/firestore';
+import { DBService } from './Services/DBService';
 
 
 const body = document.body;
@@ -26,10 +29,13 @@ btn2.root.onclick = () => {
 btn1.root.onclick = () => {
   prg.render();
 }*/
-initializeApp(firebaseConfig);
+const DBFirestore = initializeApp(firebaseConfig);
+const db = getFirestore(DBFirestore);
 
 const services = {
-  authService: new AuthService()
+  authService: new AuthService(),
+  logicService: new LogicService(),
+  dbService: new DBService(DBFirestore)
 };
 
 class App {
@@ -41,6 +47,7 @@ class App {
     const links = {
       "#": new MainPage(main.root, services),
       "#catalog": new Catalog(main.root, services),
+      "#account": new Account(main.root, services),
       "#basket": new Basket(main.root, services),
       "#authorization": new Authorization(main.root, services),
       "#reviews": new Reviews(main.root, services)
@@ -61,6 +68,13 @@ declare global {
 const auth = getAuth();
 onAuthStateChanged(auth, (user) => {
   services.authService.user = user;
-  if (!window.app) window.app = new App(document.body);
-})
+  services.dbService
+    .getDataUser(user)
+    .then(() => {
+      if (!window.app) window.app = new App(document.body);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
 

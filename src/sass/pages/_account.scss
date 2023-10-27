@@ -1,0 +1,41 @@
+.top__indent {
+  margin-top: 50px;
+}
+
+.account__inner {
+  display: flex;
+  justify-content: center;
+}
+
+.account-img {
+  margin-right: 100px;
+}
+
+.account__info {
+  margin-left: 100px;
+}
+
+.account__name {
+  display: flex;
+}
+
+.account__info-name {
+  margin-right: 50px;
+
+  p {
+    padding-bottom: 10px;
+  }
+}
+
+.account__info-personstat {
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+
+  p {
+    &:first-child {
+      margin-right: 30px;
+    }
+  }
+}
