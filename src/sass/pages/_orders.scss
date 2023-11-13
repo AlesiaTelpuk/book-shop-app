@@ -1,0 +1,53 @@
+//orders
+.orders {
+  margin-top: 30px;
+}
+
+.stat__data {
+  margin-top: 10px;
+  display: flex;
+  gap: 20px;
+}
+
+
+
+
+
+//caer history
+.cart__history {
+  margin-top: 30px;
+  background: #F1F1D5;
+  color: black;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.cart_history__orders {
+  align-items: center;
+}
+
+.cart_history__inner {
+  display: flex;
+  justify-content: space-between;
+}
+
+.histori__number {
+  font-size: 30px;
+}
+
+.cart__history__book {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 10px;
+}
+
+.cart__history__data {
+  display: flex;
+  gap: 20px;
+  font-size: 25px;
+}
+
+.cart__history-img {
+  width: 70px;
+  height: 90px;
+}

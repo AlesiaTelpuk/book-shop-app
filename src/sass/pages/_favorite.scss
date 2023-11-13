@@ -1,0 +1,19 @@
+.btn-delfromfavorite {
+  background: url("../../assets/Icons/Like1.svg");
+  width: 23px;
+  height: 23px;
+}
+
+.favorite__block {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+
+.btn__favoritecart {
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+}

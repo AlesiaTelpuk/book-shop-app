@@ -19,7 +19,7 @@ export class Router {
     const user = this.services.authService.user;
 
     // if (url === 'reviews' || url === 'account' || url === 'basket' && !user) {
-    if ((url === 'reviews' || url === 'account' || url === 'basket') && !user) {
+    if ((url === 'orders' || url === 'account' || url === 'basket') && !user) {
       this.links['#authorization'].render();
     } else {
       this.links['#' + url].render();

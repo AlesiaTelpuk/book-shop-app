@@ -19,6 +19,9 @@
 
 .title-img {
   margin-left: 30px;
+  background: url("../../assets/Icons/Sort.svg");
+  width: 22px;
+  height: 23px;
 }
 
 .books__cal {
@@ -52,4 +55,35 @@
 
 .book-name {
   font-size: 25px;
+}
+
+
+
+
+
+//select
+
+.select__filter {
+  background: url("../../assets/Icons/Filter.svg");
+  width: 20px;
+  height: 22px;
+  border: none;
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+  color: #224235;
+  font-size: 15px;
+}
+
+
+.custom-select select {
+  display: none;
+  /*hide original SELECT element: */
+}
+
+//delete strelochka
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }

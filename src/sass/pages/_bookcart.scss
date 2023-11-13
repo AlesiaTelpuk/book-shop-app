@@ -11,10 +11,37 @@
 
 }
 
+.btn-basket {
+  background: url("../../assets/Icons/AddInBasket.svg");
+  width: 25px;
+  height: 25px;
+}
+
+.btn-inbasket {
+  background: url("../../assets/Icons/InBasket.svg");
+  width: 25px;
+  height: 25px;
+}
+
+.btn-like {
+  background: url("../../assets/Icons/Like.svg");
+  width: 25px;
+  height: 25px;
+  // margin-bottom: 20px;
+}
+
+.btn-like1 {
+  background: url("../../assets/Icons/Like1.svg");
+  width: 23px;
+  height: 23px;
+  // margin-bottom: 20px;
+}
+
 .cart__buttons {
   display: flex;
   flex-direction: column;
   margin-left: 10px;
+  gap: 20px;
 }
 
 .cartbook-btn {
@@ -44,8 +71,6 @@
 }
 
 .book__price {
-  font-size: 20px;
+  font-size: 18px;
   margin: 5px 0;
-  color: black;
-  font-weight: bold;
 }

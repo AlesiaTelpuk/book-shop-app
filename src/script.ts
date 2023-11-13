@@ -5,18 +5,18 @@ import { Header } from './Common/Header';
 import { MainPage } from './Pages/MainPage';
 import { Account } from './Pages/Account';
 import { Authorization } from './Pages/Authorization';
-import { Reviews } from './Pages/Reviews';
 import { Catalog } from './Pages/Catalog';
 import { Basket } from './Pages/Basket';
 import './style.scss';
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../configFB";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { TServices } from './Abstact/Type';
+import { TDataUser, TServices } from './Abstact/Type';
 import { AuthService } from './Services/AuthService';
 import { LogicService } from './Services/LogicService';
 import { getFirestore } from 'firebase/firestore';
 import { DBService } from './Services/DBService';
+import { Orders } from './Pages/Orders';
 
 
 const body = document.body;
@@ -50,7 +50,7 @@ class App {
       "#account": new Account(main.root, services),
       "#basket": new Basket(main.root, services),
       "#authorization": new Authorization(main.root, services),
-      "#reviews": new Reviews(main.root, services)
+      "#orders": new Orders(main.root, services)
     };
 
     new Router(links, services);

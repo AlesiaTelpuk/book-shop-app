@@ -1,0 +1,64 @@
+.basket {
+  margin-top: 30px;
+}
+
+.btn-delfrombasket {
+  background: url("../../assets/Icons/DelFromBasket.svg");
+  width: 25px;
+  height: 25px;
+  margin-left: 10px;
+}
+
+.basket__books {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 150px;
+  row-gap: 50px;
+  justify-content: center;
+}
+
+.cart__inner-basket {
+  display: flex;
+  margin-top: 30px;
+}
+
+.btn__basket-calc {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  align-items: center;
+}
+
+.cart__basket-calcDel {
+  background: none;
+  font-size: 30px;
+  color: #F1F1D5;
+}
+
+.cart__basket-calcAdd {
+  background: none;
+  font-size: 30px;
+  color: #F1F1D5;
+}
+
+
+.total__basket-inner {
+  display: flex;
+  margin-top: 50px;
+  align-items: center;
+}
+
+.basket-sum {
+  margin-left: 30px;
+  font-size: 25px;
+}
+
+.nullBasket-text {
+  margin-top: 60px;
+  margin-bottom: 45px;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-align: center;
+}
