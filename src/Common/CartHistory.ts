@@ -8,15 +8,16 @@ export class CartHistory extends Component {
 
     // const inner = new Component(this.root, 'div', ["cart_history__inner"]);
     const divOrder = new Component(this.root, 'div', ["cart_history__orders"]);
-    new Component(divOrder.root, 'span', ["histori__number"], "Order №: ");
-    new Component(divOrder.root, 'span', [], data.id);
-    // new Component(divOrder.root, 'span', [], data.date.toDate().toLocaleDateString("ru"));
+    const numOrder = new Component(divOrder.root, 'div', [])
+    new Component(numOrder.root, 'span', ["histori__number"], "Order №: ");
+    new Component(numOrder.root, 'span', [], data.id);
+    new Component(divOrder.root, 'span', ["history__date"], data.date.toDate().toLocaleDateString("ru"));
 
     this.divBooks = new Component(this.root, 'div', ["cart__history__books"]);
     data.basket.forEach(bookBasket => {
       const divBook = new Component(this.divBooks.root, 'div', ["cart__history__book"]);
       new Component(divBook.root, 'img', ["cart__history-img"], null, ["src", "alt"], [bookBasket.book.url, "ghjk"]);
-      new Component(divBook.root, 'span', [], bookBasket.book.name);
+      new Component(divBook.root, 'span', ["cart__history__name"], bookBasket.book.name);
       new Component(divBook.root, 'span', [], `Prise: ${services.dbService.calcCostBook(bookBasket.count, Number(bookBasket.book.price))} BYN`);
     })
 

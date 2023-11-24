@@ -17,6 +17,7 @@ import { LogicService } from './Services/LogicService';
 import { getFirestore } from 'firebase/firestore';
 import { DBService } from './Services/DBService';
 import { Orders } from './Pages/Orders';
+import { Reviews } from './Pages/Reviews';
 
 
 const body = document.body;
@@ -50,7 +51,8 @@ class App {
       "#account": new Account(main.root, services),
       "#basket": new Basket(main.root, services),
       "#authorization": new Authorization(main.root, services),
-      "#orders": new Orders(main.root, services)
+      "#orders": new Orders(main.root, services),
+      "#reviews": new Reviews(main.root, services)
     };
 
     new Router(links, services);

@@ -62,3 +62,32 @@
   line-height: normal;
   text-align: center;
 }
+
+.dialog__window {
+  position: absolute;
+  width: 400px;
+  height: 200px;
+  background: #F1F1D5;
+  color: black;
+  left: 38%;
+  top: 30%;
+  border-radius: 20px;
+  border: 2px solid black;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.ok-btn {
+  background: #224235;
+  padding: 5px;
+  border-radius: 5px;
+  width: 150px;
+  height: 50px;
+
+  color: white;
+  font-size: 25px;
+}

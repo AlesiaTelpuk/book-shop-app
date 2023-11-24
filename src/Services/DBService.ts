@@ -4,7 +4,7 @@ import { addDoc, collection, doc, DocumentData, Firestore, getDoc, getDocs, getF
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import { Component } from "../Abstact/Component";
 import { Observer } from "../Abstact/Observer";
-import { TBook, TBookBasket, TBookFavorite, TCriteria, TDataBasket, TDataHistory, TDataHistoryWithId, TDataUser } from "../Abstact/Type";
+import { TBook, TBookBasket, TBookFavorite, TCriteria, TDataBasket, TDataGraph, TDataHistory, TDataHistoryWithId, TDataUser, TReviews } from "../Abstact/Type";
 
 
 export class DBService extends Observer {
@@ -28,8 +28,8 @@ export class DBService extends Observer {
     return cost;
   }
 
-  calcDataBasket() { //высчитывает общую сумму корзины
-    if (!this.dataUser) return;
+  async calcDataBasket(user: User | null): Promise<void> { //высчитывает общую сумму корзины
+    if (!user || !this.dataUser) return;
     let summa = 0;
     let count = 0;
     this.dataUser.basket.forEach(el => {
@@ -121,7 +121,7 @@ export class DBService extends Observer {
     await setDoc(doc(this.db, "users", user.uid), newUser) //добавляем в коллекцию в корзину пользователя данные
       .then(() => {  //если выполнено успешно
         this.dataUser = newUser; //то данные пользователя обновляются
-        this.calcDataBasket();
+        this.calcDataBasket(user);
         this.dispatch('bookInBasket', bookBasket); // подписываемся на наблюдателя, при вызове команды "bookInBasket" добавляем в коллекцию пользователя в корзину данные bookBasket
         this.dispatch('changeDataBasket', this.dataBasket);
       })
@@ -142,7 +142,7 @@ export class DBService extends Observer {
     await setDoc(doc(this.db, "users", user.uid), newUser)
       .then(() => {
         this.dataUser = newUser;
-        this.calcDataBasket();
+        this.calcDataBasket(user);
         this.dispatch("changeDataBasket", this.dataBasket);
       })
       .catch(() => { });
@@ -160,7 +160,7 @@ export class DBService extends Observer {
     await setDoc(doc(this.db, "users", user.uid), newUser) //добавляем в коллекцию в корзину пользователя данные
       .then(() => {  //если выполнено успешно
         this.dataUser = newUser; //то данные пользователя обновляются
-        this.calcDataBasket();
+        this.calcDataBasket(user);
         this.dispatch('delBookFromBasket', book.book.id); // подписываемся на наблюдателя, при вызове команды "delBookFromBasket" добавляем в коллекцию пользователя в корзину данные bookBasket
         this.dispatch('changeDataBasket', this.dataBasket);
       })
@@ -179,7 +179,7 @@ export class DBService extends Observer {
     const dataHistory = {
       basket: this.dataUser.basket,
       dataBasket: this.dataBasket,
-      data: Timestamp.now()
+      date: Timestamp.now()
     };
 
     /* try {//если товары ограничены
@@ -220,7 +220,7 @@ export class DBService extends Observer {
             })
             this.dispatch('addInHistory', dataHistory)
             this.dataUser = newUser;
-            this.calcDataBasket();
+            this.calcDataBasket(user);
             this.dispatch('clearBasket');
             this.dispatch('changeDataBasket', this.dataBasket);
             this.calcCountDocsHistory(user);
@@ -229,6 +229,7 @@ export class DBService extends Observer {
       })
       .catch(() => { });
   }
+
   async calcCountDocsHistory(user: User | null): Promise<void> {//считает количество документов в истории
     if (!user || !this.dataUser) return;
 
@@ -238,7 +239,7 @@ export class DBService extends Observer {
     querySnapshot.docs.forEach(el => {
       summa += el.data().dataBasket.allSumma;
     })
-    this.dispatch('changeStat', count, summa);
+    this.dispatch('changeStat', count, summa.toFixed(2));
   }
 
   async addBookInFavorite(user: User | null, book: TBook): Promise<void> { //добавление карточки книги в корзину
@@ -268,6 +269,7 @@ export class DBService extends Observer {
 
       })
   }
+
   async delBookFromFavorite(user: User | null, book: TBookFavorite): Promise<void> { //добавление карточки книги в корзину
     if (!user || !this.dataUser) return; //если пользователь не вошел, или количество книг на складе равно 0, или пользователя нет в хранилище, то возвращаем функцию
 
@@ -287,8 +289,6 @@ export class DBService extends Observer {
       })
   }
 
-
-
   async getAllHistory(user: User | null): Promise<TDataHistoryWithId[]> {
     if (!user || !this.dataUser) return [];
     const querySnapshot = await getDocs(collection(this.db, 'users', user.uid, 'history'));
@@ -297,6 +297,56 @@ export class DBService extends Observer {
       data.id = doc.id;
       return data;
     })
+    return rez;
+  }
+
+  openReviewsPage(book: TBook): void {
+    this.dispatch('updateReviewsPage', book);
+    window.location.hash = "#reviews";
+  }
+
+  updateDataGraph(histories: TDataHistory[]): TDataGraph[] {
+    const data = {} as Record<string, number>;
+    histories.forEach((el) => {
+      const dataString = el.date.toDate().toDateString();
+      if (data[dataString]) {
+        data[dataString] += el.dataBasket.allSumma;
+      } else {
+        data[dataString] = el.dataBasket.allSumma;
+      }
+    });
+    const sortData = [];
+    for (const day in data) {
+      sortData.push({
+        x: new Date(day),
+        y: data[day]
+      });
+    }
+    return sortData.sort(
+      (a, b) => a.x.getMilliseconds() - b.x.getMilliseconds()
+    );
+  }
+
+  async addReviewForBook(user: User | null, book: TBook, comment: string): Promise<void> {
+    if (!user || !this.dataUser) return;
+
+    await addDoc(collection(this.db, 'book', book.id, 'reviews'), {
+      username: user.displayName,
+      comment: comment,
+      date: Timestamp.now()
+    });
+  }
+
+  async getAllReviews(book: TBook): Promise<TReviews[]> {
+    const q = query(collection(this.db, 'book', book.id, 'reviews'), orderBy('date', 'desc'));
+    const querySnapshot = await getDocs(q);
+    const rez = querySnapshot.docs.map((doc) => {
+      return {
+        comment: doc.data().comment as string,
+        username: doc.data().username as string,
+        // date: doc.data().date.toDate() as Date
+      };
+    });
     return rez;
   }
 }

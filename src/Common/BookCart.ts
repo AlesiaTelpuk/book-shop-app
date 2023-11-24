@@ -17,6 +17,10 @@ export class BookCart extends Component {
     new Component(cart.root, 'p', ["book__price"], data.price + " BYN");
     new Component(cart.root, 'p', ["book__name"], data.name);
     new Component(cart.root, 'span', ["book__author"], data.author);
+
+    (cart.root as HTMLButtonElement).onclick = () => {
+      services.dbService.openReviewsPage(data);
+    }
     // new Component(this.root, 'p', ["book__genre"], "Genre: " + data.genre.join(', '));
     // new Component(this.root, 'p', ["book__genre"], data.genre.reduce((s, el) => "Genre: " + s + ", " + el));
     const buttons = new Component(this.root, 'div', ["cart__buttons"])
@@ -69,13 +73,13 @@ export class BookCart extends Component {
         this.btnInBasket.render();//добавляем кнопку "добавить в корзину"
         this.btnFromBasket.remove();//удаляем кнопку "убрать из корзины"
       }
-    })
+    });
     services.dbService.addListener('delBookFromFavorite', (idBook) => {
       if (idBook === data.id) {  //если id удаленной книги совпадает с id карточки в каталоге, то у нее
         this.btnLike.render();//добавляем кнопку "добавить в корзину"
         this.btnLike1.remove();//удаляем кнопку "убрать из корзины"
       }
-    })
+    });
   }
 
   addBookInBasket() {

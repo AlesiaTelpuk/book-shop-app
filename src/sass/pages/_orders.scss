@@ -17,6 +17,7 @@
 .cart__history {
   margin-top: 30px;
   background: #F1F1D5;
+  // opacity: 50%;
   color: black;
   padding: 20px;
   border-radius: 20px;
@@ -24,6 +25,9 @@
 
 .cart_history__orders {
   align-items: center;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .cart_history__inner {
@@ -35,11 +39,29 @@
   font-size: 30px;
 }
 
+.cart__history__books {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+  padding-right: 30px;
+}
+
 .cart__history__book {
   display: flex;
   gap: 20px;
+  padding-bottom: 5px;
   margin-bottom: 10px;
+  border-bottom: 1px solid black;
 }
+
+.cart__history__name {
+  width: 200px;
+}
+
+// .history__date {
+//   padding-left: 50%;
+// }
 
 .cart__history__data {
   display: flex;

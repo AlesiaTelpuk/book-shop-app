@@ -1,6 +1,7 @@
 import { Component } from "../Abstact/Component";
 import { TBookFavorite, TDataUser, TServices } from "../Abstact/Type";
 import { FavoriteBlock } from "../Common/FavoriteBlock";
+import { Graph } from "../Common/Graph";
 
 
 export class Account extends Component {
@@ -38,6 +39,31 @@ export class Account extends Component {
 
     const stat = new Component(container.root, 'div', ["stat", "top__indent"]);
     new Component(container.root, 'h1', ["h1__title"], "Statistics");
+    const divStat = new Component(container.root, 'div', ["stat__data"]);
+    const spanCount = new Component(divStat.root, 'span', [], "0");
+    const spanSumma = new Component(divStat.root, 'span', [], "0");
+
+    services.dbService.addListener('changeStat', (count, summa) => {
+      spanCount.root.innerHTML = `Number of orders: ${count}`;
+      spanSumma.root.innerHTML = `The total amount of ransoms:  ${summa} BYN`;
+    });
+    const divGraph = new Component(container.root, "div", ["stat__graph"]);
+    const graph = new Graph(divGraph.root);
+
+    const user = services.authService.user;
+    services.dbService.getAllHistory(user).then((historys) => {
+      graph.graphik.data.datasets[0].data = services.dbService.updateDataGraph(historys);
+      graph.graphik.update();
+      // this.putHistoryOnPage(this.divHistory, historys);
+    });
+    services.dbService.addListener('addInHistory', (history) => {
+      const user = services.authService.user;
+      services.dbService.getAllHistory(user).then((historys) => {
+        graph.graphik.data.datasets[0].data = services.dbService.updateDataGraph(historys);
+        graph.graphik.update();
+      });
+      // this.putHistoryOnPage(this.divHistory, [history as TDataHistoryWithId]);
+    });
 
     const favorit = new Component(container.root, 'div', ["favorit", "top__indent"]);
     new Component(favorit.root, 'h1', ["h1__title"], "Favorite books");

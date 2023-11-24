@@ -1,0 +1,79 @@
+.reviews__card {
+  display: flex;
+}
+
+.reviews {
+  margin-top: 30px;
+}
+
+.add__comment {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.comment__div {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.textarea {
+  border-radius: 15px;
+  background: #F1F1D5;
+  width: 544px;
+  height: 180px;
+  outline: none;
+}
+
+textarea {
+  color: black;
+  padding: 15px;
+  font-family: Goudy Bookletter 1911;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+}
+
+textarea::placeholder {
+  color: black;
+  font-family: Goudy Bookletter 1911;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.review__button {
+  width: 230px;
+  height: 50px;
+  color: black;
+  font-family: Goudy Bookletter 1911;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  border-radius: 20px;
+  background: #F1F1D5;
+}
+
+textarea:focus {
+  outline: none;
+}
+
+.cart__review {
+  margin-top: 30px;
+}
+
+.cart__reviewrow {
+  display: flex;
+  gap: 30px;
+  width: 400px;
+}
+
+.cart__reviews {
+  display: flex;
+  align-items: center;
+}

@@ -1,6 +1,7 @@
 import { getAuth } from "firebase/auth";
 import { Component } from "../Abstact/Component";
 import { TServices } from "../Abstact/Type";
+import { Reviews } from "../Pages/Reviews";
 
 export class Router {
   constructor(public links: Record<string, Component>, private services: TServices) {
@@ -21,6 +22,8 @@ export class Router {
     // if (url === 'reviews' || url === 'account' || url === 'basket' && !user) {
     if ((url === 'orders' || url === 'account' || url === 'basket') && !user) {
       this.links['#authorization'].render();
+    } else if (url === 'reviews' && !(this.links["#reviews"] as Reviews).data) {
+      this.links["#"].render();
     } else {
       this.links['#' + url].render();
     }

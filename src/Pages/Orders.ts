@@ -1,6 +1,7 @@
 import { Component } from "../Abstact/Component";
 import { TDataHistory, TDataHistoryWithId, TServices } from "../Abstact/Type";
 import { CartHistory } from "../Common/CartHistory";
+import { Graph } from "../Common/Graph";
 
 
 export class Orders extends Component {
@@ -9,6 +10,9 @@ export class Orders extends Component {
     super(parrent, "div", ["orders"]);
     const container = new Component(this.root, 'div', ["container"]);
     new Component(container.root, 'h1', ["h1__title"], "Orders");
+    // const divGraph = new Component(container.root, "div", ["stat__graph"]);
+    // const graph = new Graph(divGraph.root);
+
 
     const divStat = new Component(container.root, 'div', ["stat__data"]);
     const spanCount = new Component(divStat.root, 'span', [], "0");
@@ -25,10 +29,17 @@ export class Orders extends Component {
     services.dbService.calcCountDocsHistory(user);
 
     services.dbService.getAllHistory(user).then((historys) => {
+      // graph.graphik.data.datasets[0].data = services.dbService.updateDataGraph(historys);
+      // graph.graphik.update();
       this.putHistoryOnPage(this.divHistory, historys);
     });
 
     services.dbService.addListener('addInHistory', (history) => {
+      const user = services.authService.user;
+      // services.dbService.getAllHistory(user).then((historys) => {
+      //   graph.graphik.data.datasets[0].data = services.dbService.updateDataGraph(historys);
+      //   graph.graphik.update();
+      // });
       this.putHistoryOnPage(this.divHistory, [history as TDataHistoryWithId]);
     });
 

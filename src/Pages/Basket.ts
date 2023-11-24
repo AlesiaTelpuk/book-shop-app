@@ -12,7 +12,8 @@ export class Basket extends Component {
   fullBasket: Component;
   constructor(parrent: HTMLElement, private services: TServices) {
     super(parrent, "div", ["basket"]);
-    services.dbService.calcDataBasket();
+    const user = services.authService.user;
+    services.dbService.calcDataBasket(user);
 
     const container = new Component(this.root, 'div', ["container"]);
     new Component(container.root, 'h1', ["h1__title"], "Basket");
@@ -41,10 +42,19 @@ export class Basket extends Component {
     this.spanPercent = new Component(total.root, 'span', ["basket-sum"], `Percent: ${services.dbService.dataBasket.percent} %`);
     this.spanAllSumma = new Component(total.root, 'span', ["basket-sum"], `Total summa: ${services.dbService.dataBasket.allSumma} BYN`);
 
+    const divWindow = new Component(this.root, 'div', ["dialog__window"]);
+    divWindow.remove();
+    new Component(divWindow.root, 'p', null, "The order has been placed");
+    const btnOk = new Component(divWindow.root, 'input', ["ok-btn"], null, ["value", "type"], ["Ok", "button"]);
+    btnOk.root.onclick = () => {
+      divWindow.remove();
+    }
+
     const btnOplata = new Component(total.root, 'input', ["mainbutton"], null, ["type", "value"], ["button", "Place order"]);
     btnOplata.root.onclick = () => {
       const user = services.authService.user;
       services.dbService.addBasketInHistory(user);
+      divWindow.render();
     }
 
     services.dbService.addListener('bookInBasket', (tovar) => {//при команде "bookInBasket"

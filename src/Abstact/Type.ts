@@ -59,3 +59,13 @@ export type TDataHistoryWithId = {//переменная для оформлен
   date: Timestamp,
   id: string,
 }
+
+export type TDataGraph = {
+  x: Date,
+  y: number
+}
+export type TReviews = {
+  comment: string,
+  username: string,
+  // date: Timestamp
+}
